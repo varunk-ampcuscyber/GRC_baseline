@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════════
-   GRC ASIA CONCLAVE – INDIA 2025
+   GRC ASIA CONCLAVE – INDIA 2026
    Ultra-Modern Interactive JS v3.0
    ═══════════════════════════════════════════════════════════ */
 
@@ -233,7 +233,7 @@ function initParticles() {
    6. COUNTDOWN
 ──────────────────────────────────────── */
 function initCountdown() {
-  const eventDate = new Date('2025-06-27T09:00:00+05:30');
+  const eventDate = new Date('2026-06-27T09:00:00+05:30');
   const els = {
     days:  document.getElementById('cd-days'),
     hours: document.getElementById('cd-hours'),
