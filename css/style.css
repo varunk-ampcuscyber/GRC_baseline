@@ -90,7 +90,7 @@
    RESET & BASE
 ──────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; font-size: 16px; }
+html { scroll-behavior: smooth; font-size: 100%; }
 
 body {
   font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
@@ -115,7 +115,7 @@ body::before {
 
 ::selection { background: rgba(124,58,237,0.4); color: #fff; }
 a { text-decoration: none; color: inherit; transition: all 0.3s var(--ease); }
-img { max-width: 100%; display: block; }
+img { max-width: 100%; height: auto; display: block; }
 ul { list-style: none; }
 button { cursor: pointer; border: none; background: none; font-family: inherit; }
 
@@ -189,7 +189,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 
 .preloader-text {
   font-family: 'Orbitron', monospace;
-  font-size: 10px;
+  font-size: 0.625rem;
   letter-spacing: 4px;
   text-transform: uppercase;
   color: var(--brand-purple-light);
@@ -223,7 +223,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   align-items: center;
   gap: 8px;
   font-family: 'Orbitron', monospace;
-  font-size: 10px;
+  font-size: 0.625rem;
   font-weight: 700;
   letter-spacing: 4px;
   text-transform: uppercase;
@@ -559,7 +559,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 
 .toggle-icon {
   position: absolute;
-  font-size: 11px;
+  font-size: 0.6875rem;
   transition: all 0.3s var(--ease);
   z-index: 1;
 }
@@ -851,7 +851,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 
 .countdown-label {
   font-family: 'Orbitron', monospace;
-  font-size: 9px;
+  font-size: 0.5625rem;
   letter-spacing: 4px;
   text-transform: uppercase;
   color: var(--text-muted);
@@ -1769,7 +1769,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 
 .tier-label {
   font-family: 'Orbitron', monospace;
-  font-size: 9px;
+  font-size: 0.5625rem;
   letter-spacing: 4px;
   text-transform: uppercase;
   color: var(--text-muted);
@@ -2623,10 +2623,6 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   .audience-grid { grid-template-columns: repeat(2, 1fr); }
 
   .tickets-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
-}
-
-@media (max-width: 768px) {
-  :root { --section-py: 80px; }
 
   .nav-links {
     position: fixed;
@@ -2649,6 +2645,10 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   .nav-link { font-size: 1rem; padding: 12px 0; width: 100%; }
   .nav-cta-link { margin-top: 8px; }
   .hamburger { display: flex; }
+}
+
+@media (max-width: 768px) {
+  :root { --section-py: 80px; }
 
   .hero-title { font-size: 2.4rem; letter-spacing: -1px; }
   .hero-meta { flex-direction: column; gap: 12px; width: 100%; border-radius: var(--radius-md); }
