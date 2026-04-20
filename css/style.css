@@ -746,8 +746,8 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   background: rgba(124,58,237,0.1);
   border: 1px solid rgba(124,58,237,0.28);
   border-radius: 99px;
-  padding: 9px 22px;
-  font-size: 0.82rem;
+  padding: 12px 28px;
+  font-size: 1.1rem;
   font-weight: 600;
   letter-spacing: 1.5px;
   color: var(--brand-purple-light);
@@ -779,7 +779,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .hero-logo-wrap { margin-bottom: 32px; }
 
 .hero-logo {
-  height: 84px;
+  height: 120px;
   width: auto;
   margin: 0 auto;
   filter: drop-shadow(0 0 30px rgba(124,58,237,0.5)) drop-shadow(0 0 60px rgba(236,72,153,0.2));
@@ -794,7 +794,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 
 .hero-title {
   font-family: 'Space Grotesk', sans-serif;
-  font-size: clamp(2.6rem, 7vw, 5.5rem);
+  font-size: clamp(3.2rem, 9vw, 7rem);
   font-weight: 900;
   line-height: 1.06;
   letter-spacing: -2px;
@@ -803,7 +803,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 }
 
 .hero-subtitle {
-  font-size: clamp(1rem, 2vw, 1.2rem);
+  font-size: clamp(1.2rem, 2.5vw, 1.6rem);
   color: var(--text-secondary);
   line-height: 1.8;
   margin-bottom: 40px;
@@ -845,8 +845,8 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 }
 
 .meta-item > div { display: flex; flex-direction: column; text-align: left; }
-.meta-label { font-size: 0.68rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1.5px; }
-.meta-value { font-size: 0.92rem; font-weight: 700; color: var(--text-primary); }
+.meta-label { font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1.5px; }
+.meta-value { font-size: 1.25rem; font-weight: 700; color: var(--text-primary); }
 .meta-divider { width: 1px; height: 40px; background: var(--border-color); flex-shrink: 0; }
 
 /* Hero actions */
