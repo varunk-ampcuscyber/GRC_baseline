@@ -14,13 +14,15 @@
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://grcconclave.com/" />
   <meta property="og:title" content="GRC Asia Conclave – India 2026 | Mumbai" />
-  <meta property="og:description" content="The Premier Gathering of CISOs, Security Leaders & Chief Guests. Mumbai | 27 June 2026." />
+  <meta property="og:description"
+    content="The Premier Gathering of CISOs, Security Leaders & Chief Guests. Mumbai | 27 June 2026." />
   <meta property="og:image" content="https://grcconclave.com/images/og-image.jpg" />
 
   <meta property="twitter:card" content="summary_large_image" />
   <meta property="twitter:url" content="https://grcconclave.com/" />
   <meta property="twitter:title" content="GRC Asia Conclave – India 2026 | Mumbai" />
-  <meta property="twitter:description" content="The Premier Gathering of CISOs, Security Leaders & Chief Guests. Mumbai | 27 June 2026." />
+  <meta property="twitter:description"
+    content="The Premier Gathering of CISOs, Security Leaders & Chief Guests. Mumbai | 27 June 2026." />
   <meta property="twitter:image" content="https://grcconclave.com/images/og-image.jpg" />
 
   <!-- Schema.org JSON-LD -->
@@ -156,8 +158,10 @@
 
 
       <div class="hero-logo-wrap" data-aos="zoom-in" data-aos-delay="300">
-        <img src="images/logo-light.webp" alt="GRC Asia Conclave" class="hero-logo logo-dark-img" width="280" height="80" />
-        <img src="images/logo-dark.webp" alt="GRC Asia Conclave" class="hero-logo logo-light-img" width="280" height="80" />
+        <img src="images/logo-light.webp" alt="GRC Asia Conclave" class="hero-logo logo-dark-img" width="280"
+          height="80" />
+        <img src="images/logo-dark.webp" alt="GRC Asia Conclave" class="hero-logo logo-light-img" width="280"
+          height="80" />
       </div>
 
       <h1 class="hero-title" data-aos="fade-up" data-aos-delay="400">
@@ -171,7 +175,7 @@
       </div>
 
       <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="500">
-        Where regulators, risk leaders, and AI innovators converge to shape the future of <br> governance, risk &
+        Where regulators, risk leaders, and AI innovators converge to shape the future of governance, risk &
         compliance for continuous assurance & digital trust.
       </p>
 
@@ -212,28 +216,74 @@
         </a>
       </div>
 
-      <!-- Countdown Timer -->
-      <div class="countdown-wrap" data-aos="fade-up" data-aos-delay="800">
-        <p class="countdown-label">Event Countdown</p>
-        <div class="countdown" id="countdown">
-          <div class="countdown-item">
-            <span class="countdown-num" id="cd-days">00</span>
-            <span class="countdown-unit">Days</span>
+      <!-- Kinetic Reactor Countdown -->
+      <div class="reactor-countdown-wrap" data-aos="fade-up" data-aos-delay="800">
+        <p class="rc-title"><span class="rc-dot"></span> Event Initialization Sequence <span class="rc-dot"></span></p>
+
+        <div class="reactor-countdown" id="countdown">
+          <!-- Days -->
+          <div class="rc-core">
+            <div class="rc-ring-wrap">
+              <svg class="rc-svg" viewBox="0 0 120 120">
+                <circle class="rc-svg-track" cx="60" cy="60" r="54"></circle>
+                <circle class="rc-svg-progress" id="rc-prog-days" cx="60" cy="60" r="54"></circle>
+              </svg>
+              <div class="rc-spin-outer"></div>
+              <div class="rc-spin-inner"></div>
+              <div class="rc-glow"></div>
+              <div class="rc-num-container">
+                <div class="rc-num" id="cd-days">00</div>
+              </div>
+            </div>
+            <div class="rc-label">Days</div>
           </div>
-          <div class="countdown-sep">:</div>
-          <div class="countdown-item">
-            <span class="countdown-num" id="cd-hours">00</span>
-            <span class="countdown-unit">Hours</span>
+          <!-- Hours -->
+          <div class="rc-core rc-core-hours">
+            <div class="rc-ring-wrap">
+              <svg class="rc-svg" viewBox="0 0 120 120">
+                <circle class="rc-svg-track" cx="60" cy="60" r="54"></circle>
+                <circle class="rc-svg-progress" id="rc-prog-hours" cx="60" cy="60" r="54"></circle>
+              </svg>
+              <div class="rc-spin-outer"></div>
+              <div class="rc-spin-inner"></div>
+              <div class="rc-glow"></div>
+              <div class="rc-num-container">
+                <div class="rc-num" id="cd-hours">00</div>
+              </div>
+            </div>
+            <div class="rc-label">Hours</div>
           </div>
-          <div class="countdown-sep">:</div>
-          <div class="countdown-item">
-            <span class="countdown-num" id="cd-mins">00</span>
-            <span class="countdown-unit">Mins</span>
+          <!-- Minutes -->
+          <div class="rc-core rc-core-mins">
+            <div class="rc-ring-wrap">
+              <svg class="rc-svg" viewBox="0 0 120 120">
+                <circle class="rc-svg-track" cx="60" cy="60" r="54"></circle>
+                <circle class="rc-svg-progress" id="rc-prog-mins" cx="60" cy="60" r="54"></circle>
+              </svg>
+              <div class="rc-spin-outer"></div>
+              <div class="rc-spin-inner"></div>
+              <div class="rc-glow"></div>
+              <div class="rc-num-container">
+                <div class="rc-num" id="cd-mins">00</div>
+              </div>
+            </div>
+            <div class="rc-label">Minutes</div>
           </div>
-          <div class="countdown-sep">:</div>
-          <div class="countdown-item">
-            <span class="countdown-num" id="cd-secs">00</span>
-            <span class="countdown-unit">Secs</span>
+          <!-- Seconds -->
+          <div class="rc-core rc-core-secs">
+            <div class="rc-ring-wrap">
+              <svg class="rc-svg" viewBox="0 0 120 120">
+                <circle class="rc-svg-track" cx="60" cy="60" r="54"></circle>
+                <circle class="rc-svg-progress" id="rc-prog-secs" cx="60" cy="60" r="54"></circle>
+              </svg>
+              <div class="rc-spin-outer"></div>
+              <div class="rc-spin-inner"></div>
+              <div class="rc-glow"></div>
+              <div class="rc-num-container">
+                <div class="rc-num" id="cd-secs">00</div>
+              </div>
+            </div>
+            <div class="rc-label">Seconds</div>
           </div>
         </div>
       </div>
@@ -261,22 +311,7 @@
             class="stat-label">Sessions</span></div>
         <div class="stat-item"><span class="stat-num" data-target="30">0</span><span class="stat-plus">+</span><span
             class="stat-label">Top Sponsors</span></div>
-        <div class="stat-item"><span class="stat-num" data-target="15">0</span><span class="stat-plus">+</span><span
-            class="stat-label">Countries</span></div>
-        <div class="stat-item"><span class="stat-num" data-target="1">0</span><span class="stat-plus"></span><span
-            class="stat-label">Power-Packed Day</span></div>
-        <div class="stat-item"><span class="stat-num" data-target="500">0</span><span class="stat-plus">+</span><span
-            class="stat-label">Attendees</span></div>
-        <div class="stat-item"><span class="stat-num" data-target="40">0</span><span class="stat-plus">+</span><span
-            class="stat-label">Expert Speakers</span></div>
-        <div class="stat-item"><span class="stat-num" data-target="20">0</span><span class="stat-plus">+</span><span
-            class="stat-label">Sessions</span></div>
-        <div class="stat-item"><span class="stat-num" data-target="30">0</span><span class="stat-plus">+</span><span
-            class="stat-label">Top Sponsors</span></div>
-        <div class="stat-item"><span class="stat-num" data-target="15">0</span><span class="stat-plus">+</span><span
-            class="stat-label">Countries</span></div>
-        <div class="stat-item"><span class="stat-num" data-target="1">0</span><span class="stat-plus"></span><span
-            class="stat-label">Power-Packed Day</span></div>
+
       </div>
     </div>
     <div class="ribbon-glow-line bottom"></div>
@@ -1068,8 +1103,10 @@
       <div class="container">
         <div class="footer-grid">
           <div class="footer-brand">
-            <img src="images/logo-light.webp" alt="GRC Asia Conclave" class="footer-logo logo-dark-img" width="200" height="52" loading="lazy" />
-            <img src="images/logo-dark.webp" alt="GRC Asia Conclave" class="footer-logo logo-light-img" width="200" height="52" loading="lazy" />
+            <img src="images/logo-light.webp" alt="GRC Asia Conclave" class="footer-logo logo-dark-img" width="200"
+              height="52" loading="lazy" />
+            <img src="images/logo-dark.webp" alt="GRC Asia Conclave" class="footer-logo logo-light-img" width="200"
+              height="52" loading="lazy" />
             <p>Asia's most prestigious GRC &amp; Cybersecurity summit, brought to you by <strong>Ampcus Cyber</strong>.
             </p>
             <div class="footer-social">

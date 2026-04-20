@@ -235,37 +235,69 @@ function initParticles() {
 function initCountdown() {
   const eventDate = new Date('2026-06-27T09:00:00+05:30');
   const els = {
-    days:  document.getElementById('cd-days'),
-    hours: document.getElementById('cd-hours'),
-    mins:  document.getElementById('cd-mins'),
-    secs:  document.getElementById('cd-secs'),
+    days:  { num: document.getElementById('cd-days'),  prog: document.getElementById('rc-prog-days') },
+    hours: { num: document.getElementById('cd-hours'), prog: document.getElementById('rc-prog-hours') },
+    mins:  { num: document.getElementById('cd-mins'),  prog: document.getElementById('rc-prog-mins') },
+    secs:  { num: document.getElementById('cd-secs'),  prog: document.getElementById('rc-prog-secs') },
   };
-  if (!els.days) return;
+  if (!els.days.num) return;
 
+  const circum = 339.292; // 2 * PI * r(54)
+  
   function pad(n) { return String(n).padStart(2, '0'); }
 
-  function flip(el, val) {
-    if (el.textContent === val) return;
-    el.style.transform = 'translateY(-8px)';
-    el.style.opacity   = '0';
-    setTimeout(() => {
-      el.textContent = val;
-      el.style.transition = 'transform 0.3s cubic-bezier(0.34,1.56,0.64,1), opacity 0.3s ease';
-      el.style.transform  = 'translateY(0)';
-      el.style.opacity    = '1';
-    }, 120);
+  function updateCore(core, val, max) {
+    if (!core.num || !core.prog) return;
+    
+    const strVal = pad(val);
+    if (core.num.textContent !== strVal && core.num.textContent !== "00") {
+      core.num.style.transform = 'translateY(-12px) scale(0.85)';
+      core.num.style.opacity   = '0';
+      setTimeout(() => {
+        core.num.textContent = strVal;
+        core.num.style.transform = 'translateY(0) scale(1)';
+        core.num.style.opacity   = '1';
+      }, 150);
+    } else if (core.num.textContent === "00" && val !== 0) {
+      // First run init without animation
+      core.num.textContent = strVal;
+    }
+    
+    // Calculate SVG ring progress
+    // If days > 365, it will cap at 100% visually
+    const pct = Math.max(0, Math.min(1, val / max));
+    const offset = circum - (pct * circum);
+    core.prog.style.strokeDashoffset = offset;
   }
 
   function tick() {
-    const diff = eventDate - new Date();
-    if (diff <= 0) { Object.values(els).forEach(el => { el.textContent = '00'; }); return; }
-    flip(els.days,  pad(Math.floor(diff / 86400000)));
-    flip(els.hours, pad(Math.floor((diff % 86400000) / 3600000)));
-    flip(els.mins,  pad(Math.floor((diff % 3600000)  / 60000)));
-    flip(els.secs,  pad(Math.floor((diff % 60000)    / 1000)));
+    const diff = Math.max(0, eventDate - new Date());
+    
+    if (diff === 0) {
+      Object.values(els).forEach(c => updateCore(c, 0, 1));
+      return;
+    }
+    
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor((diff % 86400000) / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+
+    updateCore(els.days, d, 365);
+    updateCore(els.hours, h, 24);
+    updateCore(els.mins, m, 60);
+    updateCore(els.secs, s, 60);
   }
 
-  tick();
+  // Pre-set empty state
+  Object.values(els).forEach(c => {
+    if(c.prog) {
+      c.prog.style.strokeDashoffset = circum;
+      c.prog.style.transition = 'stroke-dashoffset 1.5s cubic-bezier(0.34,1.56,0.64,1)';
+    }
+  });
+
+  setTimeout(() => tick(), 100);
   setInterval(tick, 1000);
 }
 
