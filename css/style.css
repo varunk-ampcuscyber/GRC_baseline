@@ -1881,19 +1881,21 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 
 .agenda-item {
   display: grid;
-  grid-template-columns: 130px 1fr;
-  margin-bottom: 25px; /* Increased margin for better spacing */
+  grid-template-columns: 120px 1fr;
+  margin-bottom: 30px; /* More spacing for larger times */
   align-items: flex-start;
 }
 
 .agenda-time {
-  font-family: 'Orbitron', monospace;
-  font-size: 0.68rem;
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
   color: var(--brand-purple-light);
-  padding-right: 24px;
-  padding-top: 22px;
+  padding-right: 20px;
+  padding-top: 16px;
   text-align: right;
-  line-height: 1.5;
+  line-height: 1.2;
+  letter-spacing: -0.2px;
 }
 
 .agenda-content {
@@ -3034,9 +3036,9 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   .speakers-grid,
   .audience-grid { grid-template-columns: 1fr; }
 
-  .agenda-timeline::before { left: 100px; }
-  .agenda-item { grid-template-columns: 100px 1fr; }
-  .agenda-time { font-size: 0.63rem; }
+  .agenda-timeline::before { left: 95px; }
+  .agenda-item { grid-template-columns: 95px 1fr; }
+  .agenda-time { font-size: 0.9rem; line-height: 1.2; padding-top: 14px; }
 
   .form-row { grid-template-columns: 1fr; }
 
