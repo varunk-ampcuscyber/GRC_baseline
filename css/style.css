@@ -62,7 +62,7 @@
   --container-max: 1280px;
   --container-px:  var(--space-6);
   --grid-gap:      var(--space-6);
-  --nav-h:         72px;
+  --nav-h:         80px;
 
   /* Border Radius */
   --radius-xs:   6px;
@@ -567,7 +567,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 }
 
 .nav-logo img {
-  height: 40px;
+  height: 55px;
   width: auto;
   object-fit: contain;
   transition: filter 0.3s, transform 0.3s;
