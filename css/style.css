@@ -1882,7 +1882,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .agenda-item {
   display: grid;
   grid-template-columns: 130px 1fr;
-  margin-bottom: 10px;
+  margin-bottom: 25px; /* Increased margin for better spacing */
   align-items: flex-start;
 }
 
@@ -1899,7 +1899,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .agenda-content {
   position: relative;
   padding-left: 36px;
-  padding-bottom: 16px;
+  padding-bottom: 8px;
 }
 
 .agenda-dot {
@@ -1969,14 +1969,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .agenda-body h4 { font-size: 0.98rem; font-weight: 700; margin-bottom: 8px; color: var(--text-primary); }
 .agenda-body p  { font-size: 0.86rem; color: var(--text-secondary); line-height: 1.65; margin-bottom: 8px; }
 
-.agenda-speaker {
-  font-size: 0.78rem;
-  color: var(--brand-purple-light);
-  font-style: italic;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
+
 
 /* ────────────────────────────────────────
    KEY THEMES CLOUD
