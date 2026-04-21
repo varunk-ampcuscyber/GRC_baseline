@@ -62,7 +62,7 @@
   --container-max: 1280px;
   --container-px:  var(--space-6);
   --grid-gap:      var(--space-6);
-  --nav-h:         80px;
+  --nav-h:         94px;
 
   /* Border Radius */
   --radius-xs:   6px;
@@ -235,7 +235,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 }
 
 .preloader-logo img {
-  width: 200px;
+  width: 300px;
   animation: preloaderFloat 2s ease-in-out infinite;
   filter: drop-shadow(0 0 30px rgba(124,58,237,0.6));
 }
@@ -567,7 +567,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 }
 
 .nav-logo img {
-  height: 55px;
+  height: 65px;
   width: auto;
   object-fit: contain;
   transition: filter 0.3s, transform 0.3s;
