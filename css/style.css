@@ -59,7 +59,7 @@
   --section-py: var(--space-24);
 
   /* Layout */
-  --container-max: 1280px;
+  --container-max: min(94vw, 1800px);
   --container-px:  var(--space-6);
   --grid-gap:      var(--space-6);
   --nav-h:         94px;
@@ -291,7 +291,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 }
 
 .section {
-  padding: var(--section-py) 0;
+  padding: clamp(80px, 8vw, 180px) 0;
   position: relative;
   z-index: 2;
 }
@@ -810,7 +810,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .hero-content {
   position: relative;
   z-index: 3;
-  max-width: 900px;
+  max-width: clamp(780px, 58vw, 1180px);
   width: 100%;
 }
 
@@ -869,7 +869,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 
 .hero-title {
   font-family: 'Space Grotesk', sans-serif;
-  font-size: clamp(2.8rem, 7.5vw, 5.5rem);
+  font-size: clamp(3rem, 6vw, 7.5rem);
   font-weight: 900;
   line-height: 1.06;
   letter-spacing: -2px;
@@ -878,11 +878,11 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 }
 
 .hero-subtitle {
-  font-size: clamp(1rem, 2vw, 1.25rem);
+  font-size: clamp(1rem, 1.5vw, 1.5rem);
   color: var(--text-secondary);
   line-height: 1.8;
   margin-bottom: 40px;
-  max-width: 700px;
+  max-width: clamp(700px, 50vw, 900px);
   margin-left: auto;
   margin-right: auto;
 }
@@ -3081,3 +3081,73 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   }
 }
 
+/* ────────────────────────────────────────
+   LARGE SCREEN & ULTRAWIDE OPTIMIZATIONS
+──────────────────────────────────────── */
+@media (min-width: 1600px) {
+  :root {
+    --nav-h: 100px;
+    --container-px: 4rem;
+  }
+  .hero-logo {
+    height: 220px;
+  }
+  .hero-badge {
+    padding: 12px 28px;
+    font-size: 1.1rem;
+  }
+  .meta-item i {
+    font-size: 1.4rem;
+  }
+  .meta-label {
+    font-size: 0.85rem;
+  }
+  .meta-value {
+    font-size: 1.3rem;
+  }
+  .rc-num {
+    font-size: 2.8rem;
+  }
+  .rc-num-container {
+    width: 100px;
+    height: 100px;
+  }
+  .rc-ring-wrap {
+    width: 140px;
+    height: 140px;
+  }
+}
+
+@media (min-width: 1920px) {
+  .hero-section::before {
+    background:
+      radial-gradient(ellipse 70% 60% at 20% 40%, rgba(124,58,237,0.18) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 50% at 80% 20%, rgba(236,72,153,0.12) 0%, transparent 55%),
+      radial-gradient(ellipse 60% 40% at 50% 90%, rgba(249,115,22,0.1) 0%, transparent 50%),
+      radial-gradient(ellipse 50% 40% at 10% 80%, rgba(6,182,212,0.08) 0%, transparent 50%);
+  }
+  .hero-orbs .orb-1 { width: 800px; height: 800px; filter: blur(120px); }
+  .hero-orbs .orb-2 { width: 700px; height: 700px; filter: blur(100px); }
+  .hero-orbs .orb-3 { width: 600px; height: 600px; filter: blur(100px); }
+  .hero-orbs .orb-4 { width: 500px; height: 500px; filter: blur(90px); }
+
+  .hero-ring-1 { width: 900px; height: 900px; }
+  .hero-ring-2 { width: 700px; height: 700px; }
+  .hero-ring-3 { width: 1100px; height: 1100px; }
+}
+
+@media (min-width: 2560px) {
+  :root {
+    --container-max: 2000px;
+  }
+  .hero-logo {
+    height: 280px;
+  }
+  .hero-title {
+    font-size: 8rem;
+  }
+  .hero-subtitle {
+    font-size: 1.8rem;
+    max-width: 1200px;
+  }
+}
