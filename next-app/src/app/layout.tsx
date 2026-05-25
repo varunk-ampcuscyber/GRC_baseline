@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Inter, Space_Grotesk, Orbitron } from "next/font/google";
 import "./globals.css";
+import "./styles-india.css";
+
 
 const inter = Inter({
   variable: "--font-sans",

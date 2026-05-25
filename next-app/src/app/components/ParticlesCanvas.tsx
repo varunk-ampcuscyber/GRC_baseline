@@ -46,8 +46,8 @@ export default function ParticlesCanvas() {
         this.vy = Math.random() * 0.35 + 0.08;
         this.r = Math.random() * 1.8 + 0.5;
         this.opacity = Math.random() * 0.55 + 0.1;
-        const dark = ["rgba(124,58,237", "rgba(236,72,153", "rgba(249,115,22", "rgba(167,139,250"];
-        const light = ["rgba(124,58,237", "rgba(236,72,153", "rgba(139,92,246"];
+        const dark = ["rgba(255,153,51", "rgba(19,136,8", "rgba(255,255,255", "rgba(212,175,55"];
+        const light = ["rgba(255,153,51", "rgba(19,136,8", "rgba(212,175,55"];
         const palette = isDark ? dark : light;
         this.color = palette[Math.floor(Math.random() * palette.length)];
       }
@@ -96,9 +96,9 @@ export default function ParticlesCanvas() {
           const dy = particles[i].y - particles[j].y;
           const dist = Math.hypot(dx, dy);
           if (dist < CONN) {
-            const alpha = (1 - dist / CONN) * (isDark ? 0.18 : 0.09);
+            const alpha = (1 - dist / CONN) * (isDark ? 0.16 : 0.08);
             ctx.beginPath();
-            ctx.strokeStyle = `rgba(124,58,237,${alpha})`;
+            ctx.strokeStyle = `rgba(212,175,55,${alpha})`;
             ctx.lineWidth = 0.5;
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);

@@ -124,6 +124,9 @@ export default function Home() {
   const [newsletterEmail, setNewsletterEmail] = useState("");
   const [newsletterStatus, setNewsletterStatus] = useState<"idle" | "success">("idle");
 
+  // FAQ state
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
+
   // Load and apply theme from local storage
   useEffect(() => {
     const savedTheme = localStorage.getItem("grc-theme") || "dark";
@@ -226,11 +229,34 @@ export default function Home() {
   ];
 
   const tagColors = [
-    ["rgba(124,58,237,1)", "rgba(236,72,153,1)"],
-    ["rgba(236,72,153,1)", "rgba(249,115,22,1)"],
-    ["rgba(6,182,212,1)", "rgba(124,58,237,1)"],
-    ["rgba(249,115,22,1)", "rgba(245,158,11,1)"],
-    ["rgba(124,58,237,1)", "rgba(6,182,212,1)"],
+    ["rgba(255,153,51,1)", "rgba(212,175,55,1)"],
+    ["rgba(212,175,55,1)", "rgba(19,136,8,1)"],
+    ["rgba(255,255,255,1)", "rgba(255,153,51,1)"],
+    ["rgba(255,153,51,1)", "rgba(19,136,8,1)"],
+    ["rgba(212,175,55,1)", "rgba(255,255,255,1)"],
+  ];
+
+  const faqs = [
+    {
+      q: "What is the GRC Asia Conclave - India 2026?",
+      a: "It is an exclusive, invitation-only executive summit for Governance, Risk & Compliance professionals, CISOs, enterprise policy-makers, and security leaders hosted by Ampcus Cyber. The event addresses cutting-edge strategies in cybersecurity, DPDPA implementation, and AI governance."
+    },
+    {
+      q: "Who is eligible to attend?",
+      a: "Attendance is structured specifically for C-suite risk heads, Chief Information Security Officers (CISOs), risk managers, CTOs, CIOs, financial policy regulators, law enforcement, and government leaders."
+    },
+    {
+      q: "Is there a fee to register?",
+      a: "Initial interest registrations are complimentary but subject to rigorous evaluation by the Ampcus Cyber board due to restricted invitation slots. Successful delegates will receive a formal invite pass."
+    },
+    {
+      q: "What is the format of the event?",
+      a: "The conclave is a comprehensive one-day, physical, in-person summit in Mumbai featuring strategic panels, keynote briefs, technology showcases, executive roundtables, and VIP high-tea networking."
+    },
+    {
+      q: "Will there be certifications?",
+      a: "Yes! All confirmed delegates who attend the sessions will be awarded official Governance, Risk & Compliance CPE certification hours upon completion."
+    }
   ];
 
   return (
@@ -276,7 +302,7 @@ export default function Home() {
                 className={`nav-link ${activeSection === "about" ? "active" : ""}`}
                 onClick={(e) => handleScrollTo(e, "about")}
               >
-                About
+                Overview
               </a>
             </li>
             <li>
@@ -367,18 +393,46 @@ export default function Home() {
         </div>
       </nav>
 
-      {/* 4. Hero Section */}
+      {/* 4. Cinematic India + Delhi Hero Section */}
       <section id="home" className="hero-section">
         <div className="hero-bg-grid"></div>
         <div className="hero-orbs">
           <div className="orb orb-1"></div>
           <div className="orb orb-2"></div>
-          <div className="orb orb-3"></div>
-          <div className="orb orb-4"></div>
         </div>
-        <div className="hero-ring hero-ring-1"></div>
-        <div className="hero-ring hero-ring-2"></div>
-        <div className="hero-ring hero-ring-3"></div>
+        
+        {/* Stylized custom India Gate inline backdrop SVG */}
+        <div className="monument-backdrop">
+          <svg viewBox="0 0 200 200" style={{ width: "100%", height: "100%", fill: "var(--brand-gold)", opacity: 0.8 }}>
+            <path d="M40,190 h120 v-10 h-10 v-30 h-15 v30 h-70 v-30 h-15 v30 h-10 Z" />
+            <path d="M55,150 h90 v-40 h-90 Z" />
+            <path d="M55,110 h20 v-35 h-20 Z M125,110 h20 v-35 h-20 Z" />
+            <path d="M75,110 A25,25 0 0,1 125,110" fill="none" stroke="var(--brand-gold)" strokeWidth="15" />
+            <path d="M50,75 h100 v-8 h-100 Z" />
+            <path d="M60,67 h80 v-25 h-80 Z" />
+            <path d="M55,42 h90 v-6 h-90 Z" />
+            <path d="M75,36 h50 c0,-15 -50,-15 -50,0 Z" />
+          </svg>
+        </div>
+
+        {/* Rotating spinning Ashoka Chakra vector background */}
+        <div className="floating-chakra-wrap">
+          <svg viewBox="0 0 100 100" style={{ width: "100%", height: "100%", stroke: "var(--brand-gold)", fill: "none", strokeWidth: 0.5 }}>
+            <circle cx="50" cy="50" r="45" strokeDasharray="1,1" />
+            <circle cx="50" cy="50" r="40" />
+            <circle cx="50" cy="50" r="8" strokeWidth="1" />
+            <circle cx="50" cy="50" r="2" fill="var(--brand-gold)" />
+            {Array.from({ length: 24 }).map((_, i) => (
+              <line
+                key={i}
+                x1="50"
+                y1="50"
+                x2={50 + 38 * Math.cos((i * 15 * Math.PI) / 180)}
+                y2={50 + 38 * Math.sin((i * 15 * Math.PI) / 180)}
+              />
+            ))}
+          </svg>
+        </div>
 
         <div className="hero-content">
           <div className="hero-logo-wrap" data-aos="zoom-in" data-aos-delay="300">
@@ -399,11 +453,11 @@ export default function Home() {
           </div>
 
           <h1 className="hero-title" data-aos="fade-up" data-aos-delay="400">
-            <span className="gradient-text">Asia's Premier</span>
+            <span className="gradient-text">India's GRC Leadership</span>
             <br />
-            GRC &amp; Cybersecurity
+            &amp; Cybersecurity
             <br />
-            <span className="outline-text">Summit</span>
+            <span className="outline-text">Conclave</span>
           </h1>
 
           <div className="hero-badge" data-aos="fade-down" data-aos-delay="200">
@@ -412,8 +466,8 @@ export default function Home() {
           </div>
 
           <p className="hero-subtitle" data-aos="fade-up" data-aos-delay="500">
-            Where regulators, risk leaders, and AI innovators converge to shape the future of governance, risk &amp;
-            compliance for continuous assurance &amp; digital trust.
+            India's digital future meets executive policy governance. A landmark event where policy regulators, 
+            corporate risk heads, and AI creators unite to forge trusted compliance.
           </p>
 
           <div className="hero-meta" data-aos="fade-up" data-aos-delay="600">
@@ -453,17 +507,17 @@ export default function Home() {
                 setModalOpen(true);
               }}
             >
-              <span>Secure Your Seat</span>
+              <span>Register Now</span>
               <i className="fas fa-arrow-right"></i>
             </a>
             <a
-              href="#about"
+              href="#agenda"
               className="btn btn-ghost"
               onMouseMove={handleMagneticMove}
               onMouseLeave={handleMagneticReset}
-              onClick={(e) => handleScrollTo(e, "about")}
+              onClick={(e) => handleScrollTo(e, "agenda")}
             >
-              <span>Explore Event</span>
+              <span>View Agenda</span>
               <i className="fas fa-chevron-down"></i>
             </a>
           </div>
@@ -478,7 +532,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 5. Stats Section (Uncommented for Premium Visual Impact) */}
+      {/* 5. Nexus Stats Showcase */}
       <section className="nexus-stats-section">
         <div className="ns-ambient-glow"></div>
         <div className="container">
@@ -499,11 +553,203 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 6. About Section */}
+      {/* 6. Event Detail Cards Section */}
+      <section className="section">
+        <div className="container">
+          <div className="section-header" data-aos="fade-up">
+            <span className="section-tag">Conclave Metrics</span>
+            <h2 className="section-title">
+              Event <span className="gradient-text">Coordinates</span>
+            </h2>
+            <p className="section-desc">Instantly locate key timelines, venues, and registration availability for GRC 2026.</p>
+          </div>
+
+          <div className="event-details-grid">
+            {/* Card 1 */}
+            <div className="detail-card glass" onMouseMove={handleCardTilt} onMouseLeave={handleCardReset}>
+              <div className="card-icon">
+                <i className="fas fa-calendar-alt"></i>
+              </div>
+              <h3>Date</h3>
+              <p>27 June 2026</p>
+              <small>Monday Session</small>
+              {/* Ashoka chakra watermark */}
+              <svg viewBox="0 0 100 100" className="card-watermark" style={{ stroke: "var(--brand-gold)", fill: "none", strokeWidth: 0.6 }}>
+                <circle cx="50" cy="50" r="42" />
+                {Array.from({ length: 24 }).map((_, i) => (
+                  <line
+                    key={i}
+                    x1="50"
+                    y1="50"
+                    x2={50 + 40 * Math.cos((i * 15 * Math.PI) / 180)}
+                    y2={50 + 40 * Math.sin((i * 15 * Math.PI) / 180)}
+                  />
+                ))}
+              </svg>
+            </div>
+
+            {/* Card 2 */}
+            <div className="detail-card glass" onMouseMove={handleCardTilt} onMouseLeave={handleCardReset}>
+              <div className="card-icon">
+                <i className="fas fa-clock"></i>
+              </div>
+              <h3>Time</h3>
+              <p>8:30 AM to 6:30 PM</p>
+              <small>Indian Standard Time</small>
+              <svg viewBox="0 0 100 100" className="card-watermark" style={{ stroke: "var(--brand-gold)", fill: "none", strokeWidth: 0.6 }}>
+                <circle cx="50" cy="50" r="42" />
+                {Array.from({ length: 24 }).map((_, i) => (
+                  <line
+                    key={i}
+                    x1="50"
+                    y1="50"
+                    x2={50 + 40 * Math.cos((i * 15 * Math.PI) / 180)}
+                    y2={50 + 40 * Math.sin((i * 15 * Math.PI) / 180)}
+                  />
+                ))}
+              </svg>
+            </div>
+
+            {/* Card 3 */}
+            <div className="detail-card glass" onMouseMove={handleCardTilt} onMouseLeave={handleCardReset}>
+              <div className="card-icon">
+                <i className="fas fa-hourglass-half"></i>
+              </div>
+              <h3>Duration</h3>
+              <p>1 Full Day</p>
+              <small>Power-Packed Sessions</small>
+              <svg viewBox="0 0 100 100" className="card-watermark" style={{ stroke: "var(--brand-gold)", fill: "none", strokeWidth: 0.6 }}>
+                <circle cx="50" cy="50" r="42" />
+                {Array.from({ length: 24 }).map((_, i) => (
+                  <line
+                    key={i}
+                    x1="50"
+                    y1="50"
+                    x2={50 + 40 * Math.cos((i * 15 * Math.PI) / 180)}
+                    y2={50 + 40 * Math.sin((i * 15 * Math.PI) / 180)}
+                  />
+                ))}
+              </svg>
+            </div>
+
+            {/* Card 4 */}
+            <div className="detail-card glass" onMouseMove={handleCardTilt} onMouseLeave={handleCardReset}>
+              <div className="card-icon">
+                <i className="fas fa-hotel"></i>
+              </div>
+              <h3>Venue</h3>
+              <p>5-Star Premium (TBA)</p>
+              <small>Announcing Shortly</small>
+              <svg viewBox="0 0 100 100" className="card-watermark" style={{ stroke: "var(--brand-gold)", fill: "none", strokeWidth: 0.6 }}>
+                <circle cx="50" cy="50" r="42" />
+                {Array.from({ length: 24 }).map((_, i) => (
+                  <line
+                    key={i}
+                    x1="50"
+                    y1="50"
+                    x2={50 + 40 * Math.cos((i * 15 * Math.PI) / 180)}
+                    y2={50 + 40 * Math.sin((i * 15 * Math.PI) / 180)}
+                  />
+                ))}
+              </svg>
+            </div>
+
+            {/* Card 5 */}
+            <div className="detail-card glass" onMouseMove={handleCardTilt} onMouseLeave={handleCardReset}>
+              <div className="card-icon">
+                <i className="fas fa-city"></i>
+              </div>
+              <h3>City</h3>
+              <p>Delhi, India</p>
+              <small>National Capital Region</small>
+              <svg viewBox="0 0 100 100" className="card-watermark" style={{ stroke: "var(--brand-gold)", fill: "none", strokeWidth: 0.6 }}>
+                <circle cx="50" cy="50" r="42" />
+                {Array.from({ length: 24 }).map((_, i) => (
+                  <line
+                    key={i}
+                    x1="50"
+                    y1="50"
+                    x2={50 + 40 * Math.cos((i * 15 * Math.PI) / 180)}
+                    y2={50 + 40 * Math.sin((i * 15 * Math.PI) / 180)}
+                  />
+                ))}
+              </svg>
+            </div>
+
+            {/* Card 6 */}
+            <div className="detail-card glass" onMouseMove={handleCardTilt} onMouseLeave={handleCardReset}>
+              <div className="card-icon">
+                <i className="fas fa-user-tie"></i>
+              </div>
+              <h3>Speaker/Trainer</h3>
+              <p>Top Cyber Architects</p>
+              <small>RBI &amp; Government Bodies</small>
+              <svg viewBox="0 0 100 100" className="card-watermark" style={{ stroke: "var(--brand-gold)", fill: "none", strokeWidth: 0.6 }}>
+                <circle cx="50" cy="50" r="42" />
+                {Array.from({ length: 24 }).map((_, i) => (
+                  <line
+                    key={i}
+                    x1="50"
+                    y1="50"
+                    x2={50 + 40 * Math.cos((i * 15 * Math.PI) / 180)}
+                    y2={50 + 40 * Math.sin((i * 15 * Math.PI) / 180)}
+                  />
+                ))}
+              </svg>
+            </div>
+
+            {/* Card 7 */}
+            <div className="detail-card glass" onMouseMove={handleCardTilt} onMouseLeave={handleCardReset}>
+              <div className="card-icon">
+                <i className="fas fa-network-wired"></i>
+              </div>
+              <h3>Format</h3>
+              <p>Physical In-Person</p>
+              <small>Roundtables &amp; Briefs</small>
+              <svg viewBox="0 0 100 100" className="card-watermark" style={{ stroke: "var(--brand-gold)", fill: "none", strokeWidth: 0.6 }}>
+                <circle cx="50" cy="50" r="42" />
+                {Array.from({ length: 24 }).map((_, i) => (
+                  <line
+                    key={i}
+                    x1="50"
+                    y1="50"
+                    x2={50 + 40 * Math.cos((i * 15 * Math.PI) / 180)}
+                    y2={50 + 40 * Math.sin((i * 15 * Math.PI) / 180)}
+                  />
+                ))}
+              </svg>
+            </div>
+
+            {/* Card 8 */}
+            <div className="detail-card glass" onMouseMove={handleCardTilt} onMouseLeave={handleCardReset}>
+              <div className="card-icon">
+                <i className="fas fa-info-circle"></i>
+              </div>
+              <h3>Registration Status</h3>
+              <p>Invites Open</p>
+              <small>Limited Executive Slots</small>
+              <svg viewBox="0 0 100 100" className="card-watermark" style={{ stroke: "var(--brand-gold)", fill: "none", strokeWidth: 0.6 }}>
+                <circle cx="50" cy="50" r="42" />
+                {Array.from({ length: 24 }).map((_, i) => (
+                  <line
+                    key={i}
+                    x1="50"
+                    y1="50"
+                    x2={50 + 40 * Math.cos((i * 15 * Math.PI) / 180)}
+                    y2={50 + 40 * Math.sin((i * 15 * Math.PI) / 180)}
+                  />
+                ))}
+              </svg>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 7. Overview Section */}
       <section id="about" className="section about-section">
         <div className="container">
           <div className="section-header" data-aos="fade-up">
-            <span className="section-tag">About The Event</span>
+            <span className="section-tag">Overview</span>
             <h2 className="section-title">
               Architecting India's <span className="gradient-text">Digital Defense</span>
             </h2>
@@ -513,11 +759,13 @@ export default function Home() {
           <div className="about-grid">
             <div className="about-text" data-aos="fade-right">
               <p className="about-lead">
-                The GRC Asia Conclave - India is an exclusive, invitation-only event for Governance, Risk &amp; Compliance
+                The <strong>GRC Asia Conclave - India</strong> is an exclusive, invitation-only event for Governance, Risk &amp; Compliance
                 professionals hosted by Ampcus Cyber. Held in the financial capital of India, Mumbai, this one-day
-                power-packed summit aimed to boost the India AI Mission &amp; Strengthen National Cybersecurity Strategy. The
-                event intends to assemble those who matter most when it comes to India's digital safety such as senior
-                government officials, regulators, law enforcement leaders, and cybersecurity experts.
+                power-packed summit aimed to boost the <span className="highlight-gold">India AI Mission &amp; Strengthen National Cybersecurity Strategy</span>.
+              </p>
+              <p>
+                The event intends to assemble those who matter most when it comes to India's digital safety such as senior
+                government officials, regulators, law enforcement leaders, and enterprise cybersecurity experts.
               </p>
               <p>
                 The event brings out boardroom-level policy discussions, national conversations, and strategic decisions
@@ -527,41 +775,51 @@ export default function Home() {
             </div>
 
             <div className="about-visual" data-aos="fade-left" data-aos-delay="200">
-              <div className="about-card-stack">
-                <div className="acard acard-1" onMouseMove={handleCardTilt} onMouseLeave={handleCardReset}>
-                  <i className="fas fa-globe-asia"></i>
-                  <h4>Asia-Pacific Focus</h4>
-                  <p>Regional threat intelligence, local compliance dynamics, and cross-border security strategy.</p>
+              {/* Lotus Temple geometric line art watermark background */}
+              <div className="monument-outline-wrap">
+                <svg viewBox="0 0 100 80" style={{ width: "240px", height: "240px", stroke: "var(--brand-gold)", fill: "none", strokeWidth: 0.8 }}>
+                  <path d="M50,15 C55,35 65,45 80,65 C60,65 55,55 50,45 C45,55 40,65 20,65 C35,45 45,35 50,15 Z" />
+                  <path d="M50,30 C58,45 70,55 88,70 C70,70 60,60 50,52 C40,60 30,70 12,70 C30,55 42,45 50,30 Z" />
+                  <path d="M50,42 C62,55 78,65 96,75 C78,75 66,68 50,60 C34,68 22,75 4,75 C22,65 38,55 50,42 Z" />
+                </svg>
+              </div>
+
+              <div className="glass-arch-card glass">
+                <div className="arch-header">
+                  <i className="fas fa-award"></i>
+                  <h4>C-Suite Forums</h4>
                 </div>
-                <div className="acard acard-2" onMouseMove={handleCardTilt} onMouseLeave={handleCardReset}>
-                  <i className="fas fa-network-wired"></i>
-                  <h4>C-Suite Networking</h4>
-                  <p>Exclusive boardroom-style roundtables and high-value networking with top decision-makers.</p>
-                </div>
-                <div className="acard acard-3" onMouseMove={handleCardTilt} onMouseLeave={handleCardReset}>
-                  <i className="fas fa-lightbulb"></i>
-                  <h4>Innovation Showcase</h4>
-                  <p>Live demos and exhibitions from the world's leading cybersecurity &amp; GRC technology providers.</p>
-                </div>
+                <p>
+                  From boardroom-level regulatory compliance framing to cross-border secure architectures. The Conclave represents
+                  where policy transitions into frontline action.
+                </p>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 7. Why Attend Section */}
+      {/* 8. Why Attend Section */}
       <section id="why-attend" className="section why-section">
         <div className="why-bg-pattern"></div>
         <div className="container">
           <div className="section-header" data-aos="fade-up">
-            <span className="section-tag">Why Attend</span>
+            <span className="section-tag">Value Proposition</span>
             <h2 className="section-title">
               An Unmissable <span className="gradient-text">Experience</span>
             </h2>
           </div>
 
           <div className="why-grid">
-            <div className="why-card" data-aos="fade-up" data-aos-delay="0" data-num="01" onMouseMove={handleCardTilt} onMouseLeave={handleCardReset}>
+            {/* Card 1 */}
+            <div
+              className="why-card glass"
+              data-aos="fade-up"
+              data-aos-delay="0"
+              data-num="01"
+              onMouseMove={handleCardTilt}
+              onMouseLeave={handleCardReset}
+            >
               <div className="why-icon">
                 <i className="fas fa-user-shield"></i>
               </div>
@@ -571,7 +829,16 @@ export default function Home() {
                 insights, strategies, and foresight.
               </p>
             </div>
-            <div className="why-card" data-aos="fade-up" data-aos-delay="100" data-num="02" onMouseMove={handleCardTilt} onMouseLeave={handleCardReset}>
+
+            {/* Card 2 */}
+            <div
+              className="why-card glass"
+              data-aos="fade-up"
+              data-aos-delay="100"
+              data-num="02"
+              onMouseMove={handleCardTilt}
+              onMouseLeave={handleCardReset}
+            >
               <div className="why-icon">
                 <i className="fas fa-network-wired"></i>
               </div>
@@ -581,11 +848,20 @@ export default function Home() {
                 The partnerships forged here shape how India defends itself for years to come.
               </p>
             </div>
-            <div className="why-card" data-aos="fade-up" data-aos-delay="200" data-num="03" onMouseMove={handleCardTilt} onMouseLeave={handleCardReset}>
+
+            {/* Card 3 */}
+            <div
+              className="why-card glass"
+              data-aos="fade-up"
+              data-aos-delay="200"
+              data-num="03"
+              onMouseMove={handleCardTilt}
+              onMouseLeave={handleCardReset}
+            >
               <div className="why-icon">
                 <i className="fas fa-brain"></i>
               </div>
-              <h3>Intelligence You Can Act On</h3>
+              <h3>Actionable Intelligence</h3>
               <p>
                 National-level frameworks, battle-tested strategies, and frontline threat intelligence, delivered by the
                 people who built them &amp; designed for leaders who need to implement them tomorrow.
@@ -595,29 +871,39 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 8. Speakers Section */}
-      <section id="speakers" className="section speakers-section">
+      {/* 9. Key Takeaways Section */}
+      <section className="section">
         <div className="container">
           <div className="section-header" data-aos="fade-up">
-            <span className="section-tag">Speakers &amp; Leaders</span>
+            <span className="section-tag">Key Takeaways</span>
             <h2 className="section-title">
-              The Minds Behind <span className="gradient-text">India's</span> Cyber Defense
+              What You Will <span className="gradient-text">Gain</span>
             </h2>
+            <p className="section-desc">Unlock advanced strategic compliance tools and frameworks through focused, expert-led breakouts.</p>
           </div>
 
-          {/* Classified Roster Banner */}
-          <div className="coming-soon-banner" data-aos="zoom-in" data-aos-delay="100">
-            <div className="cs-scanline"></div>
-            <div className="cs-content">
-              <i className="fas fa-fingerprint"></i>
-              <h3>Classified Roster</h3>
-              <p>Full speaker line-up is currently classified. Decrypting soon...</p>
+          <div className="takeaway-grid">
+            <div className="takeaway-card glass" data-aos="fade-up" data-aos-delay="0">
+              <h4>Digital India Outlook</h4>
+              <p>Understand the intersection of the India AI Mission, local cloud data boundaries, and safe digital infrastructure.</p>
+            </div>
+            <div className="takeaway-card glass" data-aos="fade-up" data-aos-delay="100">
+              <h4>DPDPA Compliance Map</h4>
+              <p>Practical consent management structures, data fiduciary duties, and compliance pipelines to meet the DPDPA 2023 regulations.</p>
+            </div>
+            <div className="takeaway-card glass" data-aos="fade-up" data-aos-delay="200">
+              <h4>Continuous Assurance Models</h4>
+              <p>Transition from periodic cybersecurity audits to continuous, automated compliance mechanisms to secure fast systems.</p>
+            </div>
+            <div className="takeaway-card glass" data-aos="fade-up" data-aos-delay="300">
+              <h4>Threat Intelligence Models</h4>
+              <p>Establish early threat detection structures and secure immediate 6-hour incident report procedures matching CERT-In specs.</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 9. Agenda / Schedule Section */}
+      {/* 10. Agenda / Timeline Section */}
       <section id="agenda" className="section agenda-section">
         <div className="container">
           <div className="section-header" data-aos="fade-up">
@@ -628,6 +914,7 @@ export default function Home() {
           </div>
 
           <div className="agenda-timeline">
+            {/* Timeline Item */}
             <div className="agenda-item" data-aos="fade-up">
               <div className="agenda-time">
                 8.30 AM
@@ -638,7 +925,7 @@ export default function Home() {
               </div>
               <div className="agenda-content">
                 <div className="agenda-dot"></div>
-                <div className="agenda-body">
+                <div className="agenda-body glass">
                   <span className="agenda-type reg">Registration</span>
                   <h4>Registration &amp; Networking Mingle</h4>
                   <p>Organic Guests Discussion</p>
@@ -656,7 +943,7 @@ export default function Home() {
               </div>
               <div className="agenda-content">
                 <div className="agenda-dot"></div>
-                <div className="agenda-body">
+                <div className="agenda-body glass">
                   <h4>MORNING BLOCK</h4>
                 </div>
               </div>
@@ -672,7 +959,7 @@ export default function Home() {
               </div>
               <div className="agenda-content">
                 <div className="agenda-dot"></div>
-                <div className="agenda-body">
+                <div className="agenda-body glass">
                   <span className="agenda-type keynote">Welcome</span>
                   <h4>Welcome Address &amp; Setting the Stage</h4>
                   <p>The Central Argument over India's GRC Moment</p>
@@ -690,7 +977,7 @@ export default function Home() {
               </div>
               <div className="agenda-content">
                 <div className="agenda-dot"></div>
-                <div className="agenda-body">
+                <div className="agenda-body glass">
                   <span className="agenda-type keynote">Inauguration</span>
                   <h4>Chief Guest Address + Lamp Lighting Ceremony</h4>
                   <p>Formal Inauguration of the Event</p>
@@ -708,7 +995,7 @@ export default function Home() {
               </div>
               <div className="agenda-content">
                 <div className="agenda-dot"></div>
-                <div className="agenda-body">
+                <div className="agenda-body glass">
                   <span className="agenda-type session">Session</span>
                   <h4>India's Digital Risk Reckoning - Why GRC Can No Longer Wait</h4>
                   <p>High-energy, data-driven problem framing</p>
@@ -726,7 +1013,7 @@ export default function Home() {
               </div>
               <div className="agenda-content">
                 <div className="agenda-dot"></div>
-                <div className="agenda-body">
+                <div className="agenda-body glass">
                   <span className="agenda-type keynote">Keynote</span>
                   <h4>Regulatory Expectations in the Age of AI - An RBI Perspective</h4>
                   <p>RBI expectations on AI governance clarified</p>
@@ -744,7 +1031,7 @@ export default function Home() {
               </div>
               <div className="agenda-content">
                 <div className="agenda-dot"></div>
-                <div className="agenda-body">
+                <div className="agenda-body glass">
                   <span className="agenda-type break">Buffer</span>
                   <h4>Transition &amp; Q&amp;A Buffer</h4>
                 </div>
@@ -761,7 +1048,7 @@ export default function Home() {
               </div>
               <div className="agenda-content">
                 <div className="agenda-dot"></div>
-                <div className="agenda-body">
+                <div className="agenda-body glass">
                   <span className="agenda-type panel">Panel</span>
                   <h4>Panel 1: AI, Regulation &amp; the Future of GRC in Indian Financial Services</h4>
                   <p>Top quoted session, DSCI moderates</p>
@@ -779,7 +1066,7 @@ export default function Home() {
               </div>
               <div className="agenda-content">
                 <div className="agenda-dot"></div>
-                <div className="agenda-body">
+                <div className="agenda-body glass">
                   <span className="agenda-type keynote">Keynote 3</span>
                   <h4>Keynote 3: &quot;CERT-In &amp; the Evolving AI Threat Landscape&quot;</h4>
                   <p>Operationalizing six-hour AI threat reporting</p>
@@ -797,7 +1084,7 @@ export default function Home() {
               </div>
               <div className="agenda-content">
                 <div className="agenda-dot"></div>
-                <div className="agenda-body">
+                <div className="agenda-body glass">
                   <span className="agenda-type keynote">Keynote 4</span>
                   <h4>Keynote 4: &quot;Governing AI — India's National Policy Perspective&quot;</h4>
                   <p>Government-led vision: Digital India, AI Mission</p>
@@ -815,7 +1102,7 @@ export default function Home() {
               </div>
               <div className="agenda-content">
                 <div className="agenda-dot"></div>
-                <div className="agenda-body">
+                <div className="agenda-body glass">
                   <h4>MORNING WRAP &amp; LUNCH ANNOUNCEMENT</h4>
                 </div>
               </div>
@@ -831,7 +1118,7 @@ export default function Home() {
               </div>
               <div className="agenda-content">
                 <div className="agenda-dot"></div>
-                <div className="agenda-body">
+                <div className="agenda-body glass">
                   <span className="agenda-type break">Lunch</span>
                   <h4>LUNCH BREAK - Networking Lunch</h4>
                 </div>
@@ -848,7 +1135,7 @@ export default function Home() {
               </div>
               <div className="agenda-content">
                 <div className="agenda-dot"></div>
-                <div className="agenda-body">
+                <div className="agenda-body glass">
                   <span className="agenda-type session">Session</span>
                   <h4>The Human Mind in the Age of AI - Post-Lunch Experience</h4>
                   <p>Re-energising shift from regulation to solutions</p>
@@ -866,7 +1153,7 @@ export default function Home() {
               </div>
               <div className="agenda-content">
                 <div className="agenda-dot"></div>
-                <div className="agenda-body">
+                <div className="agenda-body glass">
                   <span className="agenda-type keynote">Keynote 5</span>
                   <h4>Keynote 5: &quot;Building the Always-On Enterprise - A CISO's Perspective on Continuous Compliance&quot;</h4>
                   <p>SEBI-regulated, systemically critical practitioner voice</p>
@@ -884,7 +1171,7 @@ export default function Home() {
               </div>
               <div className="agenda-content">
                 <div className="agenda-dot"></div>
-                <div className="agenda-body">
+                <div className="agenda-body glass">
                   <span className="agenda-type session">Launch</span>
                   <h4>ComplyX Launch: Mirror | Wizard | GRACE</h4>
                   <p>Vision-led journey to brand announcement</p>
@@ -902,7 +1189,7 @@ export default function Home() {
               </div>
               <div className="agenda-content">
                 <div className="agenda-dot"></div>
-                <div className="agenda-body">
+                <div className="agenda-body glass">
                   <span className="agenda-type panel">Panel</span>
                   <h4>Panel 2: From Compliance Burden to Competitive Advantage - The AI-Enabled GRC Transformation</h4>
                 </div>
@@ -919,7 +1206,7 @@ export default function Home() {
               </div>
               <div className="agenda-content">
                 <div className="agenda-dot"></div>
-                <div className="agenda-body">
+                <div className="agenda-body glass">
                   <span className="agenda-type session">Launch</span>
                   <h4>White Paper Launch: India AI Governance &amp; Continuous Compliance Outlook 2026</h4>
                   <p>Signature photo moment for press coverage</p>
@@ -937,7 +1224,7 @@ export default function Home() {
               </div>
               <div className="agenda-content">
                 <div className="agenda-dot"></div>
-                <div className="agenda-body">
+                <div className="agenda-body glass">
                   <span className="agenda-type break">Networking</span>
                   <h4>HI-TEA &amp; NETWORKING</h4>
                 </div>
@@ -954,7 +1241,7 @@ export default function Home() {
               </div>
               <div className="agenda-content">
                 <div className="agenda-dot"></div>
-                <div className="agenda-body">
+                <div className="agenda-body glass">
                   <span className="agenda-type keynote">Keynote 6</span>
                   <h4>Keynote 6: Data Privacy in the Age of AI, What DPDPA 2023 Means for India's Digital Enterprises</h4>
                   <p>DPDPA privacy: consent, automation, fiduciary duties</p>
@@ -972,7 +1259,7 @@ export default function Home() {
               </div>
               <div className="agenda-content">
                 <div className="agenda-dot"></div>
-                <div className="agenda-body">
+                <div className="agenda-body glass">
                   <span className="agenda-type keynote">Closing</span>
                   <h4>Closing Address: What India's GRC Community Must Do Next</h4>
                   <p>Forward-looking call to industry action</p>
@@ -990,7 +1277,7 @@ export default function Home() {
               </div>
               <div className="agenda-content">
                 <div className="agenda-dot"></div>
-                <div className="agenda-body">
+                <div className="agenda-body glass">
                   <span className="agenda-type val">Valedictory</span>
                   <h4>Valedictory Address</h4>
                   <p>Government close signals policy-led platform</p>
@@ -1008,7 +1295,7 @@ export default function Home() {
               </div>
               <div className="agenda-content">
                 <div className="agenda-dot"></div>
-                <div className="agenda-body">
+                <div className="agenda-body glass">
                   <span className="agenda-type val">Close</span>
                   <h4>Vote of Thanks &amp; Close</h4>
                   <p>GRC 2027 seeded, Ampcus final appearance</p>
@@ -1019,7 +1306,53 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 10. Key Themes Cloud Section */}
+      {/* 11. Speaker / Trainer Spotlight */}
+      <section id="speakers" className="section speakers-section">
+        <div className="container">
+          <div className="section-header" data-aos="fade-up">
+            <span className="section-tag">Featured Spotlight</span>
+            <h2 className="section-title">
+              Conclave <span className="gradient-text">Spotlight</span>
+            </h2>
+            <p className="section-desc">Featuring elite national-level cybersecurity policy heads, enterprise leaders, and government heads.</p>
+          </div>
+
+          <div className="speaker-highlight-container" data-aos="zoom-in">
+            <div className="speaker-spotlight-card glass">
+              <div className="speaker-img-column">
+                <div className="speaker-avatar-wrap">
+                  {/* Decorative rotating chakra photo ring */}
+                  <div className="speaker-chakra-ring"></div>
+                  <div className="speaker-photo">
+                    <i className="fas fa-user-shield"></i>
+                  </div>
+                </div>
+                <a href="#" className="speaker-social-btn" aria-label="LinkedIn">
+                  <i className="fab fa-linkedin-in"></i>
+                </a>
+              </div>
+
+              <div className="speaker-info-column">
+                <span className="speaker-role">National Policy Authorities</span>
+                <h3>To Be Announced</h3>
+                <span className="speaker-org">Ampcus Board &amp; National Regulators</span>
+                <p className="speaker-bio">
+                  The speaker panel comprises senior directors of information security from systemically critical enterprises,
+                  officials from regulatory agencies (such as RBI and DSCI), threat research heads from national monitoring centers (such as CERT-In),
+                  and strategic security architects from Ampcus Cyber.
+                </p>
+                <div className="speaker-tags">
+                  <span className="speaker-tag">AI Governance</span>
+                  <span className="speaker-tag">National Security</span>
+                  <span className="speaker-tag">Regulatory Law</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 12. Key Themes Cloud Section */}
       <section className="section themes-section">
         <div className="container">
           <div className="section-header" data-aos="fade-up">
@@ -1050,48 +1383,48 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 11. Who Should Attend Section */}
+      {/* 13. Who Should Attend Section */}
       <section className="section audience-section">
         <div className="container">
           <div className="section-header" data-aos="fade-up">
-            <span className="section-tag">Who Attends</span>
+            <span className="section-tag">Target Audience</span>
             <h2 className="section-title">
               Built for the <span className="gradient-text">Best</span>
             </h2>
           </div>
 
           <div className="audience-grid">
-            <div className="audience-card" data-aos="zoom-in" data-aos-delay="0" onMouseMove={handleCardTilt} onMouseLeave={handleCardReset}>
+            <div className="audience-card glass" data-aos="zoom-in" data-aos-delay="0" onMouseMove={handleCardTilt} onMouseLeave={handleCardReset}>
               <div className="audience-icon">
                 <i className="fas fa-user-shield"></i>
               </div>
               <h4>CISO &amp; CSOs</h4>
             </div>
-            <div className="audience-card" data-aos="zoom-in" data-aos-delay="60" onMouseMove={handleCardTilt} onMouseLeave={handleCardReset}>
+            <div className="audience-card glass" data-aos="zoom-in" data-aos-delay="60" onMouseMove={handleCardTilt} onMouseLeave={handleCardReset}>
               <div className="audience-icon">
                 <i className="fas fa-balance-scale"></i>
               </div>
               <h4>Risk &amp; Compliance Leaders</h4>
             </div>
-            <div className="audience-card" data-aos="zoom-in" data-aos-delay="120" onMouseMove={handleCardTilt} onMouseLeave={handleCardReset}>
+            <div className="audience-card glass" data-aos="zoom-in" data-aos-delay="120" onMouseMove={handleCardTilt} onMouseLeave={handleCardReset}>
               <div className="audience-icon">
                 <i className="fas fa-sitemap"></i>
               </div>
               <h4>CIO &amp; CTOs</h4>
             </div>
-            <div className="audience-card" data-aos="zoom-in" data-aos-delay="180" onMouseMove={handleCardTilt} onMouseLeave={handleCardReset}>
+            <div className="audience-card glass" data-aos="zoom-in" data-aos-delay="180" onMouseMove={handleCardTilt} onMouseLeave={handleCardReset}>
               <div className="audience-icon">
                 <i className="fas fa-university"></i>
               </div>
               <h4>Regulators &amp; Government</h4>
             </div>
-            <div className="audience-card" data-aos="zoom-in" data-aos-delay="240" onMouseMove={handleCardTilt} onMouseLeave={handleCardReset}>
+            <div className="audience-card glass" data-aos="zoom-in" data-aos-delay="240" onMouseMove={handleCardTilt} onMouseLeave={handleCardReset}>
               <div className="audience-icon">
                 <i className="fas fa-building"></i>
               </div>
               <h4>BFSI &amp; Enterprise Leaders</h4>
             </div>
-            <div className="audience-card" data-aos="zoom-in" data-aos-delay="300" onMouseMove={handleCardTilt} onMouseLeave={handleCardReset}>
+            <div className="audience-card glass" data-aos="zoom-in" data-aos-delay="300" onMouseMove={handleCardTilt} onMouseLeave={handleCardReset}>
               <div className="audience-icon">
                 <i className="fas fa-rocket"></i>
               </div>
@@ -1101,7 +1434,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 12. Sponsors & Partners Section */}
+      {/* 14. Sponsors & Partners Section */}
       <section id="sponsors" className="section sponsors-section">
         <div className="container">
           <div className="section-header" data-aos="fade-up">
@@ -1151,7 +1484,7 @@ export default function Home() {
           </div>
 
           <div className="sponsor-cta" data-aos="fade-up" data-aos-delay="300">
-            <div className="sponsor-cta-inner" onMouseMove={handleCardTilt} onMouseLeave={handleCardReset}>
+            <div className="sponsor-cta-inner glass" onMouseMove={handleCardTilt} onMouseLeave={handleCardReset}>
               <h3>Become a Sponsor</h3>
               <p>Connect your brand with 500+ senior security leaders. Limited sponsorship packages available.</p>
               <a
@@ -1183,7 +1516,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 13. Venue Section */}
+      {/* 15. Venue / Delhi Section */}
       <section id="venue" className="section venue-section">
         <div className="container">
           <div className="section-header" data-aos="fade-up">
@@ -1196,12 +1529,12 @@ export default function Home() {
           <div className="venue-grid">
             <div className="venue-info" data-aos="fade-right">
               <div className="venue-badge">
-                <i className="fas fa-map-marker-alt"></i> Mumbai, India
+                <i className="fas fa-map-marker-alt"></i> Delhi, India
               </div>
               <h3>Venue: To Be Announced</h3>
               <p className="venue-desc">
                 The exact venue will be announced shortly. Expect a grand, premium 5-star setting befitting a summit of
-                this stature in the heart of Mumbai, India's financial capital.
+                this stature in the heart of Delhi, India's historic and political capital.
               </p>
 
               <div className="venue-details">
@@ -1223,7 +1556,7 @@ export default function Home() {
                   <i className="fas fa-city"></i>
                   <div>
                     <strong>City</strong>
-                    <span>Mumbai, Maharashtra, India</span>
+                    <span>Delhi, India (NCR)</span>
                   </div>
                 </div>
               </div>
@@ -1247,10 +1580,34 @@ export default function Home() {
             <div className="venue-visual" data-aos="fade-left" data-aos-delay="200">
               <div className="venue-map-placeholder">
                 <div className="map-bg">
+                  {/* Stylized custom Delhi skyline vector backdrop */}
+                  <div className="monument-outline-wrap" style={{ width: "90%", height: "90%", opacity: 0.25 }}>
+                    <svg viewBox="0 0 500 150" style={{ width: "100%", height: "100%", fill: "var(--brand-gold)" }}>
+                      <rect x="20" y="80" width="30" height="70" opacity="0.4" />
+                      <rect x="40" y="60" width="25" height="90" opacity="0.5" />
+                      <path d="M90,150 L95,20 L102,20 L107,150 Z" opacity="0.8" />
+                      <rect x="94" y="50" width="9" height="4" opacity="0.9" />
+                      <rect x="93" y="90" width="11" height="4" opacity="0.9" />
+                      <path d="M140,150 v-40 c0,-15 30,-15 30,0 v40 Z" opacity="0.4" />
+                      <rect x="190" y="95" width="40" height="55" opacity="0.6" />
+                      <rect x="220" y="70" width="25" height="80" opacity="0.5" />
+                      <path d="M270,150 h50 v-5 h-5 v-15 h-5 v15 h-30 v-15 h-5 v15 h-5 Z" opacity="0.8" />
+                      <path d="M275,130 h40 v-18 h-40 Z" opacity="0.8" />
+                      <path d="M280,112 A10,10 0 0,1 310,112" fill="none" stroke="var(--brand-gold)" strokeWidth="6" opacity="0.8" />
+                      <path d="M272,97 h46 v-4 h-46 Z" opacity="0.8" />
+                      <path d="M276,93 h38 v-12 h-38 Z" opacity="0.8" />
+                      <path d="M360,150 C365,120 375,110 390,95 C375,120 370,130 360,150 Z" opacity="0.5" />
+                      <path d="M420,150 C415,120 405,110 390,95 C405,120 410,130 420,150 Z" opacity="0.5" />
+                      <path d="M390,95 C392,110 398,120 405,150 C398,120 392,110 390,95 Z" opacity="0.6" />
+                      <rect x="440" y="40" width="35" height="110" opacity="0.3" />
+                      <polygon points="440,40 457,15 475,40" opacity="0.3" />
+                    </svg>
+                  </div>
+
                   <div className="map-grid"></div>
                   <div className="map-pin">
                     <i className="fas fa-map-marker-alt"></i>
-                    <span>Mumbai, India</span>
+                    <span>Delhi, India</span>
                   </div>
                   <div className="map-rings">
                     <div className="ring r1"></div>
@@ -1264,7 +1621,45 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 14. Footer */}
+      {/* 16. FAQ Accordion Section */}
+      <section className="section faq-section">
+        <div className="container">
+          <div className="section-header" data-aos="fade-up">
+            <span className="section-tag">Information Desk</span>
+            <h2 className="section-title">
+              Frequently Asked <span className="gradient-text">Questions</span>
+            </h2>
+            <p className="section-desc">Find quick resolutions for delegate registrations, travel coordination, and certification queries.</p>
+          </div>
+
+          <div className="faq-container">
+            {faqs.map((faq, index) => (
+              <div
+                key={index}
+                className={`faq-item ${openFaq === index ? "open" : ""}`}
+                data-aos="fade-up"
+                data-aos-delay={index * 50}
+              >
+                <button
+                  type="button"
+                  className="faq-trigger"
+                  onClick={() => setOpenFaq(openFaq === index ? null : index)}
+                >
+                  <span>{faq.q}</span>
+                  <span className="faq-icon-wrap">
+                    <i className="fas fa-plus"></i>
+                  </span>
+                </button>
+                <div className="faq-content">
+                  <p>{faq.a}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 17. Footer */}
       <footer className="footer">
         <div className="footer-top">
           <div className="container">
@@ -1287,8 +1682,7 @@ export default function Home() {
                   loading="lazy"
                 />
                 <p>
-                  Asia's most prestigious GRC &amp; Cybersecurity summit, brought to you by{" "}
-                  <strong>Ampcus Cyber</strong>.
+                  India's most prestigious executive GRC summit, brought to you by <strong>Ampcus Cyber</strong>.
                 </p>
                 <div className="footer-social">
                   <a href="#" aria-label="LinkedIn">
@@ -1311,7 +1705,7 @@ export default function Home() {
                 <ul>
                   <li>
                     <a href="#about" onClick={(e) => handleScrollTo(e, "about")}>
-                      About the Event
+                      Overview
                     </a>
                   </li>
                   <li>
@@ -1342,7 +1736,7 @@ export default function Home() {
                         setModalOpen(true);
                       }}
                     >
-                      Register
+                      Register Now
                     </a>
                   </li>
                 </ul>
@@ -1430,7 +1824,7 @@ export default function Home() {
                   </div>
                   <div className="fei-item">
                     <i className="fas fa-map-marker-alt"></i>
-                    <span>Mumbai, India</span>
+                    <span>Delhi, India</span>
                   </div>
                 </div>
               </div>
@@ -1464,10 +1858,10 @@ export default function Home() {
         <i className="fas fa-chevron-up"></i>
       </button>
 
-      {/* 15. The Enquiry Validation Modal */}
+      {/* 18. The Enquiry Validation Modal */}
       <EnquiryModal isOpen={modalOpen} onClose={() => setModalOpen(false)} />
 
-      {/* 16. Dynamic loading of AOS script */}
+      {/* 19. Dynamic loading of AOS script */}
       <Script
         src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"
         strategy="lazyOnload"
