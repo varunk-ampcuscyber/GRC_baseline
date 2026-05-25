@@ -51,12 +51,12 @@ function initPreloader() {
    2. LOGO BANNER POPUP
 ──────────────────────────────────────── */
 function initLogoBanner() {
-  const banner  = document.getElementById('logoBannerModal');
+  const banner = document.getElementById('logoBannerModal');
   const closeBtn = document.getElementById('closeLogoBannerModal');
   if (!banner || !closeBtn) return;
 
-  const show  = () => { banner.classList.add('open'); banner.setAttribute('aria-hidden','false'); document.body.style.overflow = 'hidden'; };
-  const close = () => { banner.classList.remove('open'); banner.setAttribute('aria-hidden','true'); document.body.style.overflow = ''; };
+  const show = () => { banner.classList.add('open'); banner.setAttribute('aria-hidden', 'false'); document.body.style.overflow = 'hidden'; };
+  const close = () => { banner.classList.remove('open'); banner.setAttribute('aria-hidden', 'true'); document.body.style.overflow = ''; };
 
   setTimeout(show, 5000);
   closeBtn.addEventListener('click', close);
@@ -68,8 +68,8 @@ function initLogoBanner() {
 ──────────────────────────────────────── */
 function initTheme() {
   const toggle = document.getElementById('themeToggle');
-  const html   = document.documentElement;
-  const KEY    = 'grc-theme';
+  const html = document.documentElement;
+  const KEY = 'grc-theme';
 
   const saved = localStorage.getItem(KEY);
   if (saved) html.setAttribute('data-theme', saved);
@@ -98,7 +98,7 @@ function initNavbar() {
 
 function initActiveNavLink() {
   const sections = document.querySelectorAll('section[id]');
-  const navLinks  = document.querySelectorAll('.nav-link');
+  const navLinks = document.querySelectorAll('.nav-link');
 
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
@@ -124,13 +124,13 @@ function initParticles() {
   const ctx = canvas.getContext('2d');
   let width, height, particles = [];
   let isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-  let mouse  = { x: -1000, y: -1000 };
+  let mouse = { x: -1000, y: -1000 };
 
   const COUNT = 100;
-  const CONN  = 130;
+  const CONN = 130;
 
   function resize() {
-    width  = canvas.width  = window.innerWidth;
+    width = canvas.width = window.innerWidth;
     height = canvas.height = window.innerHeight;
   }
 
@@ -138,13 +138,13 @@ function initParticles() {
     constructor() { this.reset(true); }
 
     reset(initial = false) {
-      this.x  = Math.random() * width;
-      this.y  = initial ? Math.random() * height : -12;
+      this.x = Math.random() * width;
+      this.y = initial ? Math.random() * height : -12;
       this.vx = (Math.random() - 0.5) * 0.45;
       this.vy = Math.random() * 0.35 + 0.08;
-      this.r  = Math.random() * 1.8 + 0.5;
+      this.r = Math.random() * 1.8 + 0.5;
       this.opacity = Math.random() * 0.55 + 0.1;
-      const dark  = ['rgba(124,58,237', 'rgba(236,72,153', 'rgba(249,115,22', 'rgba(167,139,250'];
+      const dark = ['rgba(124,58,237', 'rgba(236,72,153', 'rgba(249,115,22', 'rgba(167,139,250'];
       const light = ['rgba(124,58,237', 'rgba(236,72,153', 'rgba(139,92,246'];
       const palette = isDark ? dark : light;
       this.color = palette[Math.floor(Math.random() * palette.length)];
@@ -188,8 +188,8 @@ function initParticles() {
   function drawConnections() {
     for (let i = 0; i < particles.length; i++) {
       for (let j = i + 1; j < particles.length; j++) {
-        const dx   = particles[i].x - particles[j].x;
-        const dy   = particles[i].y - particles[j].y;
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
         const dist = Math.hypot(dx, dy);
         if (dist < CONN) {
           const alpha = (1 - dist / CONN) * (isDark ? 0.18 : 0.09);
@@ -235,34 +235,34 @@ function initParticles() {
 function initCountdown() {
   const eventDate = new Date('2026-06-27T09:00:00+05:30');
   const els = {
-    days:  { num: document.getElementById('cd-days'),  prog: document.getElementById('rc-prog-days') },
+    days: { num: document.getElementById('cd-days'), prog: document.getElementById('rc-prog-days') },
     hours: { num: document.getElementById('cd-hours'), prog: document.getElementById('rc-prog-hours') },
-    mins:  { num: document.getElementById('cd-mins'),  prog: document.getElementById('rc-prog-mins') },
-    secs:  { num: document.getElementById('cd-secs'),  prog: document.getElementById('rc-prog-secs') },
+    mins: { num: document.getElementById('cd-mins'), prog: document.getElementById('rc-prog-mins') },
+    secs: { num: document.getElementById('cd-secs'), prog: document.getElementById('rc-prog-secs') },
   };
   if (!els.days.num) return;
 
   const circum = 339.292; // 2 * PI * r(54)
-  
+
   function pad(n) { return String(n).padStart(2, '0'); }
 
   function updateCore(core, val, max) {
     if (!core.num || !core.prog) return;
-    
+
     const strVal = pad(val);
     if (core.num.textContent !== strVal && core.num.textContent !== "00") {
       core.num.style.transform = 'translateY(-12px) scale(0.85)';
-      core.num.style.opacity   = '0';
+      core.num.style.opacity = '0';
       setTimeout(() => {
         core.num.textContent = strVal;
         core.num.style.transform = 'translateY(0) scale(1)';
-        core.num.style.opacity   = '1';
+        core.num.style.opacity = '1';
       }, 150);
     } else if (core.num.textContent === "00" && val !== 0) {
       // First run init without animation
       core.num.textContent = strVal;
     }
-    
+
     // Calculate SVG ring progress
     // If days > 365, it will cap at 100% visually
     const pct = Math.max(0, Math.min(1, val / max));
@@ -272,12 +272,12 @@ function initCountdown() {
 
   function tick() {
     const diff = Math.max(0, eventDate - new Date());
-    
+
     if (diff === 0) {
       Object.values(els).forEach(c => updateCore(c, 0, 1));
       return;
     }
-    
+
     const d = Math.floor(diff / 86400000);
     const h = Math.floor((diff % 86400000) / 3600000);
     const m = Math.floor((diff % 3600000) / 60000);
@@ -291,7 +291,7 @@ function initCountdown() {
 
   // Pre-set empty state
   Object.values(els).forEach(c => {
-    if(c.prog) {
+    if (c.prog) {
       c.prog.style.strokeDashoffset = circum;
       c.prog.style.transition = 'stroke-dashoffset 1.5s cubic-bezier(0.34,1.56,0.64,1)';
     }
@@ -322,9 +322,9 @@ function initStats() {
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (!entry.isIntersecting) return;
-      const el     = entry.target;
+      const el = entry.target;
       const target = parseInt(el.dataset.target);
-      const key    = el.dataset.target + el.closest('.stat-item')?.textContent?.slice(-5);
+      const key = el.dataset.target + el.closest('.stat-item')?.textContent?.slice(-5);
 
       if (!seen.has(el)) {
         seen.add(el);
@@ -351,7 +351,7 @@ function animateCounter(el, start, end, duration) {
    9. HAMBURGER
 ──────────────────────────────────────── */
 function initHamburger() {
-  const btn   = document.getElementById('hamburger');
+  const btn = document.getElementById('hamburger');
   const links = document.getElementById('nav-links');
   if (!btn || !links) return;
 
@@ -379,29 +379,29 @@ function initHamburger() {
    10. CONTACT FORM (MODAL)
 ──────────────────────────────────────── */
 function initContactForm() {
-  const modal    = document.getElementById('enquiryModal');
+  const modal = document.getElementById('enquiryModal');
   const closeBtn = document.getElementById('closeEnquiryModal');
   const triggers = document.querySelectorAll('.open-enquiry-popup');
-  const form     = document.getElementById('contactForm');
-  const success  = document.getElementById('form-success');
+  const form = document.getElementById('contactForm');
+  const success = document.getElementById('form-success');
   if (!form || !modal || !closeBtn) return;
 
   const rules = {
-    fname:       { regex: /^[A-Za-z][A-Za-z\s'-]{1,49}$/,           msg: 'First name: 2–50 letters only.' },
-    lname:       { regex: /^[A-Za-z][A-Za-z\s'-]{1,49}$/,           msg: 'Last name: 2–50 letters only.' },
-    email:       { regex: /^[^\s@]{1,64}@[^\s@]+\.[^\s@]{2,}$/,     msg: 'Enter a valid work email.' },
-    phone:       { regex: /^(?:\+?\d{1,3})?[6-9]\d{9}$/,            msg: 'Enter a valid 10-digit phone number.' },
-    company:     { regex: /^[A-Za-z0-9].{1,98}$/,                   msg: 'Company name: 2–100 characters.' },
-    designation: { regex: /^[A-Za-z].{1,78}$/,                      msg: 'Designation: 2–80 characters.' },
-    interest:    { regex: /^(delegate|vip|speaking|sponsorship|media|other)$/, msg: 'Please select an option.' },
-    message:     { regex: /^[\s\S]{20,1000}$/,                       msg: 'Message: 20–1000 characters.' },
+    fname: { regex: /^[A-Za-z][A-Za-z\s'-]{1,49}$/, msg: 'First name: 2–50 letters only.' },
+    lname: { regex: /^[A-Za-z][A-Za-z\s'-]{1,49}$/, msg: 'Last name: 2–50 letters only.' },
+    email: { regex: /^[^\s@]{1,64}@[^\s@]+\.[^\s@]{2,}$/, msg: 'Enter a valid work email.' },
+    phone: { regex: /^(?:\+?\d{1,3})?[6-9]\d{9}$/, msg: 'Enter a valid 10-digit phone number.' },
+    company: { regex: /^[A-Za-z0-9].{1,98}$/, msg: 'Company name: 2–100 characters.' },
+    designation: { regex: /^[A-Za-z].{1,78}$/, msg: 'Designation: 2–80 characters.' },
+    interest: { regex: /^(delegate|vip|speaking|sponsorship|media|other)$/, msg: 'Please select an option.' },
+    message: { regex: /^[\s\S]{20,1000}$/, msg: 'Message: 20–1000 characters.' },
   };
 
-  const setError   = (f, msg) => { f.closest('.form-group')?.classList.add('error'); const e = document.getElementById(`${f.id}-error`); if (e) e.textContent = msg; };
-  const clearError = (f)      => { f.closest('.form-group')?.classList.remove('error'); const e = document.getElementById(`${f.id}-error`); if (e) e.textContent = ''; };
+  const setError = (f, msg) => { f.closest('.form-group')?.classList.add('error'); const e = document.getElementById(`${f.id}-error`); if (e) e.textContent = msg; };
+  const clearError = (f) => { f.closest('.form-group')?.classList.remove('error'); const e = document.getElementById(`${f.id}-error`); if (e) e.textContent = ''; };
 
-  const openModal  = () => { modal.classList.add('open'); modal.setAttribute('aria-hidden','false'); document.body.style.overflow = 'hidden'; };
-  const closeModal = () => { modal.classList.remove('open'); modal.setAttribute('aria-hidden','true'); document.body.style.overflow = ''; };
+  const openModal = () => { modal.classList.add('open'); modal.setAttribute('aria-hidden', 'false'); document.body.style.overflow = 'hidden'; };
+  const closeModal = () => { modal.classList.remove('open'); modal.setAttribute('aria-hidden', 'true'); document.body.style.overflow = ''; };
 
   triggers.forEach(t => t.addEventListener('click', e => { e.preventDefault(); openModal(); }));
   closeBtn.addEventListener('click', closeModal);
@@ -413,37 +413,37 @@ function initContactForm() {
     if (!rule) return true;
     clearError(field);
     const val = field.value.trim();
-    if (!val)              { setError(field, 'This field is required.'); return false; }
+    if (!val) { setError(field, 'This field is required.'); return false; }
     if (!rule.regex.test(val)) { setError(field, rule.msg); return false; }
     return true;
   }
 
   form.querySelectorAll('input,select,textarea').forEach(f => {
-    f.addEventListener('blur',  () => validateField(f));
+    f.addEventListener('blur', () => validateField(f));
     f.addEventListener('input', () => { if (f.value.trim()) clearError(f); });
   });
 
   form.addEventListener('submit', async e => {
     e.preventDefault();
-    const btn     = form.querySelector('button[type="submit"]');
+    const btn = form.querySelector('button[type="submit"]');
     const btnText = btn.querySelector('span');
     let valid = true;
     form.querySelectorAll('[required][name]').forEach(f => { if (!validateField(f)) valid = false; });
     if (!valid) { shakeEl(form); return; }
 
-    btn.disabled  = true;
+    btn.disabled = true;
     btnText.textContent = 'Sending…';
 
     try {
       const data = {};
-      ['fname','lname','email','phone','company','designation','interest','message']
+      ['fname', 'lname', 'email', 'phone', 'company', 'designation', 'interest', 'message']
         .forEach(k => { data[k] = form.querySelector(`#${k}`)?.value.trim(); });
 
-      const res    = await fetch('api/submit-enquiry.php', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(data) });
+      const res = await fetch('api/submit-enquiry.php', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
       const result = await res.json();
 
       if (!res.ok || !result.success) {
-        if (result.errors) Object.entries(result.errors).forEach(([k,v]) => { const f = form.querySelector(`[name="${k}"]`); if (f) setError(f,v); });
+        if (result.errors) Object.entries(result.errors).forEach(([k, v]) => { const f = form.querySelector(`[name="${k}"]`); if (f) setError(f, v); });
         throw new Error(result.message || 'Submission failed.');
       }
 
@@ -462,7 +462,7 @@ function initContactForm() {
 
 function shakeEl(el) {
   el.animate(
-    [{ transform:'translateX(-7px)' }, { transform:'translateX(7px)' }, { transform:'translateX(-5px)' }, { transform:'translateX(5px)' }, { transform:'translateX(0)' }],
+    [{ transform: 'translateX(-7px)' }, { transform: 'translateX(7px)' }, { transform: 'translateX(-5px)' }, { transform: 'translateX(5px)' }, { transform: 'translateX(0)' }],
     { duration: 350, easing: 'ease-in-out' }
   );
 }
@@ -477,7 +477,7 @@ function initNewsletterForm() {
   form.addEventListener('submit', async e => {
     e.preventDefault();
     const input = form.querySelector('input');
-    const btn   = form.querySelector('button');
+    const btn = form.querySelector('button');
     if (!input.value.trim()) return;
 
     const email = input.value.trim();
@@ -486,7 +486,7 @@ function initNewsletterForm() {
     input.value = '';
 
     try {
-      await fetch('tables/newsletter', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ email }) });
+      await fetch('tables/newsletter', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email }) });
     } catch (_) { /* silent */ }
 
     setTimeout(() => {
@@ -517,7 +517,7 @@ function initCustomCursor() {
   wrapper.innerHTML = `<div id="cursor-dot"></div><div id="cursor-ring"></div><div id="cursor-glow"></div>`;
   document.body.appendChild(wrapper);
 
-  const dot  = document.getElementById('cursor-dot');
+  const dot = document.getElementById('cursor-dot');
   const ring = document.getElementById('cursor-ring');
   const glow = document.getElementById('cursor-glow');
 
@@ -528,19 +528,19 @@ function initCustomCursor() {
   (function animateCursor() {
     // Dot: instant
     dot.style.left = mx + 'px';
-    dot.style.top  = my + 'px';
+    dot.style.top = my + 'px';
 
     // Ring: lag
     rx += (mx - rx) * 0.14;
     ry += (my - ry) * 0.14;
     ring.style.left = rx + 'px';
-    ring.style.top  = ry + 'px';
+    ring.style.top = ry + 'px';
 
     // Glow: more lag
     gx += (mx - gx) * 0.06;
     gy += (my - gy) * 0.06;
     glow.style.left = gx + 'px';
-    glow.style.top  = gy + 'px';
+    glow.style.top = gy + 'px';
 
     requestAnimationFrame(animateCursor);
   })();
@@ -549,13 +549,13 @@ function initCustomCursor() {
   const interactives = 'a, button, .why-card, .acard, .speaker-card, .ticket-card, .audience-card, .pillar, .theme-tag';
   document.querySelectorAll(interactives).forEach(el => {
     el.addEventListener('mouseenter', () => {
-      ring.style.width  = '60px';
+      ring.style.width = '60px';
       ring.style.height = '60px';
       ring.style.borderColor = 'rgba(236,72,153,0.6)';
       dot.style.transform = 'translate(-50%,-50%) scale(2)';
     });
     el.addEventListener('mouseleave', () => {
-      ring.style.width  = '36px';
+      ring.style.width = '36px';
       ring.style.height = '36px';
       ring.style.borderColor = 'rgba(167,139,250,0.6)';
       dot.style.transform = 'translate(-50%,-50%) scale(1)';
@@ -585,20 +585,20 @@ function initCardTilt() {
 
   cards.forEach(card => {
     card.addEventListener('mousemove', e => {
-      const rect   = card.getBoundingClientRect();
-      const cx     = rect.left + rect.width  / 2;
-      const cy     = rect.top  + rect.height / 2;
-      const dx     = (e.clientX - cx) / (rect.width  / 2);
-      const dy     = (e.clientY - cy) / (rect.height / 2);
-      const tiltX  = dy * -8;
-      const tiltY  = dx * 8;
+      const rect = card.getBoundingClientRect();
+      const cx = rect.left + rect.width / 2;
+      const cy = rect.top + rect.height / 2;
+      const dx = (e.clientX - cx) / (rect.width / 2);
+      const dy = (e.clientY - cy) / (rect.height / 2);
+      const tiltX = dy * -8;
+      const tiltY = dx * 8;
 
-      card.style.transform  = `perspective(800px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) translateY(-6px)`;
+      card.style.transform = `perspective(800px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) translateY(-6px)`;
       card.style.transition = 'transform 0.1s ease';
     });
 
     card.addEventListener('mouseleave', () => {
-      card.style.transform  = '';
+      card.style.transform = '';
       card.style.transition = 'transform 0.5s cubic-bezier(0.34,1.56,0.64,1)';
     });
   });
@@ -615,14 +615,14 @@ function initMagneticButtons() {
   buttons.forEach(btn => {
     btn.addEventListener('mousemove', e => {
       const rect = btn.getBoundingClientRect();
-      const dx   = (e.clientX - (rect.left + rect.width  / 2)) * 0.22;
-      const dy   = (e.clientY - (rect.top  + rect.height / 2)) * 0.22;
-      btn.style.transform  = `translate(${dx}px, ${dy}px)`;
+      const dx = (e.clientX - (rect.left + rect.width / 2)) * 0.22;
+      const dy = (e.clientY - (rect.top + rect.height / 2)) * 0.22;
+      btn.style.transform = `translate(${dx}px, ${dy}px)`;
       btn.style.transition = 'transform 0.1s ease';
     });
 
     btn.addEventListener('mouseleave', () => {
-      btn.style.transform  = '';
+      btn.style.transform = '';
       btn.style.transition = 'transform 0.4s cubic-bezier(0.34,1.56,0.64,1)';
     });
   });
@@ -635,7 +635,7 @@ function initThemeTagHover() {
   const colors = [
     ['rgba(124,58,237,1)', 'rgba(236,72,153,1)'],
     ['rgba(236,72,153,1)', 'rgba(249,115,22,1)'],
-    ['rgba(6,182,212,1)',  'rgba(124,58,237,1)'],
+    ['rgba(6,182,212,1)', 'rgba(124,58,237,1)'],
     ['rgba(249,115,22,1)', 'rgba(245,158,11,1)'],
     ['rgba(124,58,237,1)', 'rgba(6,182,212,1)'],
   ];
@@ -651,8 +651,8 @@ function initThemeTagHover() {
    SMOOTH SCROLL
 ──────────────────────────────────────── */
 document.querySelectorAll('a[href^="#"]').forEach(a => {
-  a.addEventListener('click', function(e) {
-    const href   = this.getAttribute('href');
+  a.addEventListener('click', function (e) {
+    const href = this.getAttribute('href');
     if (!href || href === '#') return;
     const target = document.querySelector(href);
     if (!target) return;
@@ -665,7 +665,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 /* ────────────────────────────────────────
    FORM VALIDATION STYLES (injected)
 ──────────────────────────────────────── */
-(function() {
+(function () {
   const s = document.createElement('style');
   s.textContent = `
     .form-group.error input,
